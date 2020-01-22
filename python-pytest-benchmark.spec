@@ -8,15 +8,14 @@
 Summary:	py.test fixture for benchmarking code
 Summary(pl.UTF-8):	Wyposażenie py.testa do testowania wydajności kodu
 Name:		python-pytest-benchmark
-Version:	3.1.1
-Release:	3
+Version:	3.2.3
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-benchmark/
 Source0:	https://files.pythonhosted.org/packages/source/p/pytest-benchmark/pytest-benchmark-%{version}.tar.gz
-# Source0-md5:	dce60d8b2a63389cf8619acce8297186
-Patch0:		%{name}-capture.patch
-Patch1:		%{name}-tests.patch
+# Source0-md5:	b1bd517e4560bcaeb640ab5aac266632
+Patch0:		%{name}-tests.patch
 URL:		https://github.com/ionelmc/pytest-benchmark
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.6
@@ -105,7 +104,6 @@ Dokumentacja API modułu Pythona pytest_benchmark.
 %prep
 %setup -q -n pytest-benchmark-%{version}
 %patch0 -p1
-%patch1 -p1
 
 # (mostly temporarily disabled tests)
 # requires elasticsearch

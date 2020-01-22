@@ -1,229 +1,176 @@
---- pytest-benchmark-3.1.1/tests/test_benchmark.py.orig	2017-07-25 13:13:37.000000000 +0200
-+++ pytest-benchmark-3.1.1/tests/test_benchmark.py	2018-08-03 08:22:04.858085767 +0200
-@@ -128,11 +128,11 @@
-     result.stdout.fnmatch_lines([
-         "*collected 5 items",
+--- pytest-benchmark-3.2.3/tests/test_benchmark.py.orig	2020-01-09 10:52:40.000000000 +0100
++++ pytest-benchmark-3.2.3/tests/test_benchmark.py	2020-01-22 19:01:38.505984152 +0100
+@@ -86,7 +86,7 @@
          "*",
--        "test_groups.py::*test_groups PASSED",
--        "test_groups.py::test_fast PASSED",
--        "test_groups.py::test_slow PASSED",
--        "test_groups.py::test_slower PASSED",
--        "test_groups.py::test_xfast PASSED",
-+        "test_groups.py::*test_groups PASSED*",
-+        "test_groups.py::test_fast PASSED*",
-+        "test_groups.py::test_slow PASSED*",
-+        "test_groups.py::test_slower PASSED*",
-+        "test_groups.py::test_xfast PASSED*",
+         "* benchmark 'A': 2 tests *",
          "*",
-         "* benchmark: 2 tests *",
-         "*",
-@@ -460,7 +460,7 @@
-     result = testdir.runpytest('--doctest-modules', '--benchmark-max-time=0.000001', '--benchmark-min-rounds=1', test)
-     result.stdout.fnmatch_lines([
-         "*collected 3 items",
--        "test_max_time_min_rounds.py ...",
-+        "test_max_time_min_rounds.py ...*",
-         "* benchmark: 2 tests *",
-         "Name (time in ?s) * Min * Max * Mean * StdDev * Rounds * Iterations",
+-        "*====== 5 passed * ======*",
++        "*====== 5 passed* ======*",
+     ])
+ 
+ 
+@@ -203,7 +203,7 @@
+         'test_b[[]*[]]             *',
+         '----------------------*',
+         '*', '*',
+-        '============* 8 passed * ============*',
++        '============* 8 passed* ============*',
+     ])
+ 
+ 
+@@ -244,7 +244,7 @@
+         '',
+         'Legend:',
+         '  Outliers: 1 Standard Deviation from M*',
+-        '============* 8 passed * ============*',
++        '============* 8 passed* ============*',
+     ])
+ 
+ 
+@@ -276,7 +276,7 @@
+         'Legend:',
+         '  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd '
+         'Quartile.',
+-        '============* 8 passed * ============*',
++        '============* 8 passed* ============*',
+     ])
+ 
+ 
+@@ -309,7 +309,7 @@
+         'Legend:',
+         '  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd '
+         'Quartile.',
+-        '============* 8 passed * ============*',
++        '============* 8 passed* ============*',
+     ])
+ 
+ 
+@@ -352,7 +352,7 @@
+         'Legend:',
+         '  Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd '
+         'Quartile.',
+-        '============* 8 passed * ============*',
++        '============* 8 passed* ============*',
+     ])
+ 
+ 
+@@ -370,7 +370,7 @@
+         "* benchmark 'test_y.py::test_a[[]1[]]': 1 tests *",
+         "* benchmark 'test_y.py::test_b[[]0[]]': 1 tests *",
+         "* benchmark 'test_y.py::test_b[[]1[]]': 1 tests *",
+-        '============* 8 passed * ============*',
++        '============* 8 passed* ============*',
+     ])
+ 
+ 
+@@ -403,7 +403,7 @@
+         "test_fast          *",
+         "test_slow          *",
          "------*",
-@@ -476,7 +476,7 @@
-     result = testdir.runpytest('--doctest-modules', '--benchmark-max-time=0.000001', test)
-     result.stdout.fnmatch_lines([
-         "*collected 3 items",
--        "test_max_time.py ...",
-+        "test_max_time.py ...*",
-         "* benchmark: 2 tests *",
-         "Name (time in ?s) * Min * Max * Mean * StdDev * Rounds * Iterations",
+-        "*====== 2 passed * ======*",
++        "*====== 2 passed* ======*",
+     ])
+ 
+ 
+@@ -429,7 +429,7 @@
+         "test_fast          * 1  *",
+         "test_slow          * 1  *",
          "------*",
-@@ -587,7 +587,7 @@
-     result = testdir.runpytest('--benchmark-max-time=0.0000001', '--doctest-modules', '--benchmark-compare=0002', '-rw',
-                                test)
-     result.stdout.fnmatch_lines([
--        "WBENCHMARK-C1 * Can't compare. No benchmark files * '0002'.",
-+        "* Can't compare. No benchmark files * '0002'.",
+-        "*====== 3 passed * ======*",
++        "*====== 3 passed* ======*",
      ])
  
  
-@@ -597,7 +597,7 @@
-     result = testdir.runpytest('--benchmark-max-time=0.0000001', '--doctest-modules', '--benchmark-compare=0002',
-                                test, '--benchmark-verbose')
-     result.stderr.fnmatch_lines([
--        " WARNING: Can't compare. No benchmark files * '0002'.",
-+        "* Can't compare. No benchmark files * '0002'.",
+@@ -445,7 +445,7 @@
+         "test_fast          * 5  *",
+         "test_slow          * 5  *",
+         "------*",
+-        "*====== 3 passed * ======*",
++        "*====== 3 passed* ======*",
      ])
  
  
-@@ -606,7 +606,7 @@
-     result = testdir.runpytest('--benchmark-max-time=0.0000001', '--doctest-modules', '-rw',
-                                test, '--benchmark-compare')
-     result.stdout.fnmatch_lines([
--        "WBENCHMARK-C2 * Can't compare. No benchmark files in '*'."
-+        "* Can't compare. No benchmark files in '*'."
-         " Can't load the previous benchmark."
-     ])
- 
-@@ -616,7 +616,7 @@
-     result = testdir.runpytest('--benchmark-max-time=0.0000001', '--doctest-modules',
-                                test, '--benchmark-compare', '--benchmark-verbose')
-     result.stderr.fnmatch_lines([
--        " WARNING: Can't compare. No benchmark files in '*'."
-+        "* Can't compare. No benchmark files in '*'."
-         " Can't load the previous benchmark."
-     ])
- 
-@@ -626,7 +626,7 @@
-     result = testdir.runpytest('--benchmark-max-time=0.0000001', '--doctest-modules', '-rw',
-                                test, '--benchmark-compare=1')
-     result.stdout.fnmatch_lines([
--        "WBENCHMARK-C1 * Can't compare. No benchmark files in '*' match '1'."
-+        "* Can't compare. No benchmark files in '*' match '1'."
-     ])
+@@ -698,6 +698,11 @@
  
  
-@@ -635,7 +635,7 @@
-     result = testdir.runpytest('--benchmark-max-time=0.0000001', '--doctest-modules',
-                                test, '--benchmark-compare=1', '--benchmark-verbose')
-     result.stderr.fnmatch_lines([
--        " WARNING: Can't compare. No benchmark files in '*' match '1'."
-+        "* Can't compare. No benchmark files in '*' match '1'."
-     ])
- 
- 
-@@ -679,6 +679,7 @@
-     assert bench_info['extra_info'] == {'foo': 'bar'}
- 
- 
-+@pytest.mark.skip("requires pygal")
  def test_histogram(testdir):
++    try:
++        import pygal, pygaljs
++    except ImportError:
++        pytest.skip("No pygal or pygaljs module")
++
      test = testdir.makepyfile(SIMPLE_TEST)
-     result = testdir.runpytest('--doctest-modules', '--benchmark-histogram=foobar',
-@@ -715,7 +716,7 @@
-     result = testdir.runpytest('--benchmark-disable-gc', test)
-     result.stdout.fnmatch_lines([
-         "*collected 2 items",
--        "test_disable_gc.py ..",
-+        "test_disable_gc.py ..*",
-         "* benchmark: 2 tests *",
-         "Name (time in ?s) * Min * Max * Mean * StdDev * Rounds * Iterations",
+     result = testdir.runpytest_subprocess('--doctest-modules', '--benchmark-histogram=foobar',
+                                           '--benchmark-max-time=0.0000001', test)
+@@ -740,7 +745,7 @@
+         "test_fast          *",
+         "test_slow          *",
          "------*",
-@@ -731,7 +732,7 @@
-     result = testdir.runpytest('--benchmark-timer=time.time', test)
-     result.stdout.fnmatch_lines([
-         "*collected 2 items",
--        "test_custom_timer.py ..",
-+        "test_custom_timer.py ..*",
-         "* benchmark: 2 tests *",
-         "Name (time in ?s) * Min * Max * Mean * StdDev * Rounds * Iterations",
-         "------*",
-@@ -757,7 +758,7 @@
-     result = testdir.runpytest('--benchmark-sort=mean', test)
-     result.stdout.fnmatch_lines([
-         "*collected 2 items",
--        "test_sort_by_mean.py ..",
-+        "test_sort_by_mean.py ..*",
-         "* benchmark: 2 tests *",
-         "Name (time in ?s) * Min * Max * Mean * StdDev * Rounds * Iterations",
-         "------*",
-@@ -858,11 +859,11 @@
-     result.stdout.fnmatch_lines([
-         "*collected 5 items",
+-        "*====== 2 passed * ======*",
++        "*====== 2 passed* ======*",
+     ])
  
--        "test_abort_broken.py::test_bad FAILED",
--        "test_abort_broken.py::test_bad2 FAILED",
--        "test_abort_broken.py::test_ok[a] ERROR",
--        "test_abort_broken.py::test_ok[b] ERROR",
--        "test_abort_broken.py::test_ok[c] ERROR",
-+        "test_abort_broken.py::test_bad FAILED*",
-+        "test_abort_broken.py::test_bad2 FAILED*",
-+        "test_abort_broken.py::test_ok[a] ERROR*",
-+        "test_abort_broken.py::test_ok[b] ERROR*",
-+        "test_abort_broken.py::test_ok[c] ERROR*",
  
-         "*====== ERRORS ======*",
-         "*______ ERROR at setup of test_ok[[]a[]] ______*",
-@@ -977,11 +978,11 @@
-     result = testdir.runpytest('-vv', '--doctest-modules', test)
-     result.stdout.fnmatch_lines([
-         "*collected 5 items",
--        "test_basic.py::*test_basic PASSED",
--        "test_basic.py::test_slow PASSED",
--        "test_basic.py::test_slower PASSED",
--        "test_basic.py::test_xfast PASSED",
--        "test_basic.py::test_fast PASSED",
-+        "test_basic.py::*test_basic PASSED*",
-+        "test_basic.py::test_slow PASSED*",
-+        "test_basic.py::test_slower PASSED*",
-+        "test_basic.py::test_xfast PASSED*",
-+        "test_basic.py::test_fast PASSED*",
+@@ -756,7 +761,7 @@
+         "test_fast          *",
+         "test_slow          *",
+         "------*",
+-        "*====== 2 passed * ======*",
++        "*====== 2 passed* ======*",
+     ])
+ 
+ 
+@@ -782,7 +787,7 @@
+         "test_fast          *",
+         "test_slow          *",
+         "------*",
+-        "*====== 2 passed * ======*",
++        "*====== 2 passed* ======*",
+     ])
+ 
+ 
+@@ -1017,7 +1022,7 @@
+         "test_*         *",
+         "------*",
          "",
-         "* benchmark: 4 tests *",
-         "Name (time in ?s) * Min * Max * Mean * StdDev * Rounds * Iterations",
-@@ -1001,11 +1002,11 @@
-     result = testdir.runpytest('-vv', '--doctest-modules', '--benchmark-skip', test)
-     result.stdout.fnmatch_lines([
-         "*collected 5 items",
--        "test_skip.py::*test_skip PASSED",
--        "test_skip.py::test_slow SKIPPED",
--        "test_skip.py::test_slower SKIPPED",
--        "test_skip.py::test_xfast SKIPPED",
--        "test_skip.py::test_fast SKIPPED",
-+        "test_skip.py::*test_skip PASSED*",
-+        "test_skip.py::test_slow SKIPPED*",
-+        "test_skip.py::test_slower SKIPPED*",
-+        "test_skip.py::test_xfast SKIPPED*",
-+        "test_skip.py::test_fast SKIPPED*",
-         "*====== 1 passed, 4 skipped* seconds ======*",
+-        "*====== 5 passed * ======*",
++        "*====== 5 passed* ======*",
      ])
  
-@@ -1015,11 +1016,11 @@
-     result = testdir.runpytest('-vv', '--doctest-modules', '--benchmark-disable', test)
-     result.stdout.fnmatch_lines([
-         "*collected 5 items",
--        "test_disable.py::*test_disable PASSED",
--        "test_disable.py::test_slow PASSED",
--        "test_disable.py::test_slower PASSED",
--        "test_disable.py::test_xfast PASSED",
--        "test_disable.py::test_fast PASSED",
-+        "test_disable.py::*test_disable PASSED*",
-+        "test_disable.py::test_slow PASSED*",
-+        "test_disable.py::test_slower PASSED*",
-+        "test_disable.py::test_xfast PASSED*",
-+        "test_disable.py::test_fast PASSED*",
-         "*====== 5 passed * seconds ======*",
+ 
+@@ -1031,7 +1036,7 @@
+         "test_skip.py::test_slower SKIPPED*",
+         "test_skip.py::test_xfast SKIPPED*",
+         "test_skip.py::test_fast SKIPPED*",
+-        "*====== 1 passed, 4 skipped * ======*",
++        "*====== 1 passed, 4 skipped* ======*",
      ])
  
-@@ -1029,7 +1030,7 @@
-     result = testdir.runpytest('-vv', '--doctest-modules', '-m', 'benchmark', test)
-     result.stdout.fnmatch_lines([
-         "*collected 5 items",
--        "test_mark_selection.py::test_xfast PASSED",
-+        "test_mark_selection.py::test_xfast PASSED*",
-         "* benchmark: 1 tests *",
-         "Name (time in ?s) * Min * Max * Mean * StdDev * Rounds * Iterations",
+ 
+@@ -1045,7 +1050,7 @@
+         "test_disable.py::test_slower PASSED*",
+         "test_disable.py::test_xfast PASSED*",
+         "test_disable.py::test_fast PASSED*",
+-        "*====== 5 passed * ======*",
++        "*====== 5 passed* ======*",
+     ])
+ 
+ 
+@@ -1060,7 +1065,7 @@
          "------*",
-@@ -1045,11 +1046,11 @@
-     result = testdir.runpytest('-vv', '--doctest-modules', '--benchmark-only', test)
-     result.stdout.fnmatch_lines([
-         "*collected 5 items",
--        "test_only_benchmarks.py::*test_only_benchmarks SKIPPED",
--        "test_only_benchmarks.py::test_slow PASSED",
--        "test_only_benchmarks.py::test_slower PASSED",
--        "test_only_benchmarks.py::test_xfast PASSED",
--        "test_only_benchmarks.py::test_fast PASSED",
-+        "test_only_benchmarks.py::*test_only_benchmarks SKIPPED*",
-+        "test_only_benchmarks.py::test_slow PASSED*",
-+        "test_only_benchmarks.py::test_slower PASSED*",
-+        "test_only_benchmarks.py::test_xfast PASSED*",
-+        "test_only_benchmarks.py::test_fast PASSED*",
-         "* benchmark: 4 tests *",
-         "Name (time in ?s) * Min * Max * Mean * StdDev * Rounds * Iterations",
+         "test_xfast       *",
          "------*",
-@@ -1067,7 +1068,7 @@
-     result = testdir.runpytest('--doctest-modules', '--benchmark-columns=max,iterations,min', test)
-     result.stdout.fnmatch_lines([
-         "*collected 3 items",
--        "test_columns.py ...",
-+        "test_columns.py ...*",
-         "* benchmark: 2 tests *",
-         "Name (time in ?s) * Max * Iterations * Min *",
+-        "*====== 1 passed, 4 deselected * ======*",
++        "*====== 1 passed, 4 deselected* ======*",
+     ])
+ 
+ 
+@@ -1082,7 +1087,7 @@
+         "test_*         *",
+         "test_*         *",
          "------*",
+-        "*====== 4 passed, 1 skipped * ======*",
++        "*====== 4 passed, 1 skipped* ======*",
+     ])
+ 
+ 
