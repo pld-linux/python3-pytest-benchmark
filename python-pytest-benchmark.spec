@@ -25,13 +25,12 @@ BuildRequires:	python-setuptools
 # for storage tests
 #BuildRequires:	python-elasticsearch >= 5.3.0
 BuildRequires:	python-freezegun >= 0.3.8
-BuildRequires:	python-hunter >= 1.4.1
 BuildRequires:	python-pathlib >= 1.0.1
 BuildRequires:	python-py-cpuinfo
 # for histogram tests
 #BuildRequires:	python-pygal >= 2.2.1
 #BuildRequires:	python-pygaljs >= 1.0.1
-BuildRequires:	python-pytest >= 2.8
+BuildRequires:	python-pytest >= 3.8
 BuildRequires:	python-statistics >= 1.0.3.5
 %endif
 %endif
@@ -43,12 +42,11 @@ BuildRequires:	python3-setuptools
 # for storage tests
 #BuildRequires:	python3-elasticsearch >= 5.3.0
 BuildRequires:	python3-freezegun >= 0.3.8
-BuildRequires:	python3-hunter >= 1.4.1
 BuildRequires:	python3-py-cpuinfo
 # for histogram tests
 #BuildRequires:	python3-pygal >= 2.2.3
 #BuildRequires:	python3-pygaljs >= 1.0.1
-BuildRequires:	python3-pytest >= 2.8
+BuildRequires:	python3-pytest >= 3.8
 %if "%{py3_ver}" < "3.3"
 BuildRequires:	python3-mock >= 2.0.0
 %endif
