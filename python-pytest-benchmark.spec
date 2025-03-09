@@ -101,7 +101,7 @@ Dokumentacja API modułu Pythona pytest_benchmark.
 
 %prep
 %setup -q -n pytest-benchmark-%{version}
-%patch0 -p1
+%patch -P 0 -p1
 
 # (mostly temporarily disabled tests)
 # requires elasticsearch
