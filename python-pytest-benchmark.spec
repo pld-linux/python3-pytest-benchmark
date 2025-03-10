@@ -9,7 +9,7 @@ Summary:	py.test fixture for benchmarking code
 Summary(pl.UTF-8):	Wyposażenie py.testa do testowania wydajności kodu
 Name:		python-pytest-benchmark
 Version:	3.4.1
-Release:	3
+Release:	4
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/pytest-benchmark/
