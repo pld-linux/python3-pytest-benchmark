@@ -14,8 +14,8 @@ Group:		Libraries/Python
 Source0:	https://files.pythonhosted.org/packages/source/p/pytest-benchmark/pytest-benchmark-%{version}.tar.gz
 # Source0-md5:	66a8040a2bc0813be44680d4b4254882
 URL:		https://github.com/ionelmc/pytest-benchmark
-BuildRequires:	python3-modules >= 1:3.4
-BuildRequires:	python3-setuptools
+BuildRequires:	python3-modules >= 1:3.9
+BuildRequires:	python3-setuptools >= 1:30.3.0
 %if %{with tests}
 #BuildRequires:	python3-aspectlib >= 1.4.2
 # for storage tests
@@ -25,22 +25,15 @@ BuildRequires:	python3-py-cpuinfo
 # for histogram tests
 #BuildRequires:	python3-pygal >= 2.2.3
 #BuildRequires:	python3-pygaljs >= 1.0.1
-BuildRequires:	python3-pytest >= 3.8
-%if "%{py3_ver}" < "3.3"
-BuildRequires:	python3-mock >= 2.0.0
-%endif
-%if "%{py3_ver}" < "3.4"
-BuildRequires:	python3-pathlib >= 1.0.1
-BuildRequires:	python3-statistics >= 1.0.3.5
-%endif
+BuildRequires:	python3-pytest >= 8.1
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with doc}
-BuildRequires:	python3-sphinx_py3doc_enhanced_theme
-BuildRequires:	sphinx-pdg-3
+BuildRequires:	python3-furo
+BuildRequires:	sphinx-pdg-3 >= 1.3
 %endif
-Requires:	python3-modules >= 1:3.4
+Requires:	python3-modules >= 1:3.9
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
