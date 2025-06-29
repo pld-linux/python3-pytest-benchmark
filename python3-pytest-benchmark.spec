@@ -3,8 +3,8 @@
 %bcond_without	doc	# Sphinx documentation
 %bcond_with	tests	# unit tests [very sensitive to pytest output]
 
-Summary:	py.test fixture for benchmarking code
-Summary(pl.UTF-8):	Wyposażenie py.testa do testowania wydajności kodu
+Summary:	pytest fixture for benchmarking code
+Summary(pl.UTF-8):	Wyposażenie pytesta do testowania wydajności kodu
 Name:		python3-pytest-benchmark
 Version:	5.1.0
 Release:	1
@@ -17,15 +17,19 @@ URL:		https://github.com/ionelmc/pytest-benchmark
 BuildRequires:	python3-modules >= 1:3.9
 BuildRequires:	python3-setuptools >= 1:30.3.0
 %if %{with tests}
-#BuildRequires:	python3-aspectlib >= 1.4.2
+#BuildRequires:	python3-aspectlib >= 2.0.0
 # for storage tests
-#BuildRequires:	python3-elasticsearch >= 5.3.0
-BuildRequires:	python3-freezegun >= 0.3.8
+#BuildRequires:	python3-elasticsearch >= 8.15.1
+BuildRequires:	python3-freezegun >= 1.5.1
 BuildRequires:	python3-py-cpuinfo
 # for histogram tests
-#BuildRequires:	python3-pygal >= 2.2.3
-#BuildRequires:	python3-pygaljs >= 1.0.1
+#BuildRequires:	python3-pygal >= 3.0.5
+#BuildRequires:	python3-pygaljs >= 1.0.2
 BuildRequires:	python3-pytest >= 8.1
+# ?
+#BuildRequires:	python3-hunter
+#BuildRequires:	python3-nbmake >= 1.5.4
+#BuildRequires:	python3-pytest-instafail >= 0.5.0
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -71,14 +75,18 @@ Dokumentacja API modułu Pythona pytest_benchmark.
 %{__rm} tests/test_with_weaver.py
 # a few too depending on git, one elasticsearch
 %{__rm} tests/test_utils.py
+# requires nbmake
+%{__sed} -i -e '/--nbmake/d' pytest.ini
 
 %build
 %py3_build
 
 %if %{with tests}
+# test_histogram requires pygal,pygaljs
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+PYTEST_PLUGINS=pytest_benchmark.plugin,xdist.plugin \
 PYTHONPATH=$(pwd)/src \
-%{__python3} -m pytest tests
+%{__python3} -m pytest tests -k 'not test_histogram'
 %endif
 
 %if %{with doc}
